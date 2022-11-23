@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp\\Internship-2-C-Sharp\\Internship-2-C-Sharp.csproj": {}
+    "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp – kopija\\Internship-2-C-Sharp\\Internship-2-C-Sharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp\\Internship-2-C-Sharp\\Internship-2-C-Sharp.csproj": {
+    "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp – kopija\\Internship-2-C-Sharp\\Internship-2-C-Sharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp\\Internship-2-C-Sharp\\Internship-2-C-Sharp.csproj",
+        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp – kopija\\Internship-2-C-Sharp\\Internship-2-C-Sharp.csproj",
         "projectName": "Internship-2-C-Sharp",
-        "projectPath": "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp\\Internship-2-C-Sharp\\Internship-2-C-Sharp.csproj",
+        "projectPath": "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp – kopija\\Internship-2-C-Sharp\\Internship-2-C-Sharp.csproj",
         "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp\\Internship-2-C-Sharp\\obj\\",
+        "outputPath": "C:\\Users\\Korisnik\\Desktop\\Internship-2-C-Sharp – kopija\\Internship-2-C-Sharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",

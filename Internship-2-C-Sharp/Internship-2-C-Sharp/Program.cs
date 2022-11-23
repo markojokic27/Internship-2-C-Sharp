@@ -36,29 +36,6 @@ var Players = new Dictionary<string, (string position, int rating)>() {
     {"Ivo Grbić", ("GK",78) },
     {"Dominik Livaković", ("GK",80) }
 };
-var Keys = new List<string>()
-{
-    "Luka Modrić",
-    "Marcelo Brozović",
-    "Mateo Kovacic",
-    "Ivan Perišić",
-    "Andrej Kramarić",
-    "Joško Gvardiol",
-    "Mario Pašalić",
-    "Lovro Majer",
-    "Borna Sosa",
-    "Nikola Vlašić",
-    "Dejan Lovren",
-    "Mislav Oršić",
-    "Marko Livaja",
-    "Domagoj Vida",
-    "Ante Budimir",
-    "Martin Erlić",
-    "Bruno Petković",
-    "Josip Stanišič ",
-    "Ivo Grbić",
-    "Dominik Livaković"
-};
 var First11 = new Dictionary<string, (string position, int rating)>();
 var Games = new Dictionary<int, (string team1, string team2, int goals1, int goals2)>(){
     {0, ("Hrvatska","Maroko",0,0)},
@@ -86,19 +63,22 @@ while (command != 0)
             var i = 1;
             var oldRating = 0;
             Console.WriteLine($"    REZULTAT TRENINGA\n\n {" ",2} {"IME I PREZIME",-20} {"POZICIJA",-15} {"STARI RATING",-15}  {"NOVI RATING",-15}  {"REZULTAT",-15}");
-            /*foreach (var player in Players)
+            foreach (var k in Players.Keys)
             {
-                oldRating = player.Value.rating;
-                //double r= player.Value.rating+oldRating*random.Next(-5,6)*0.01;
-                var newRating = ChangeRating(oldRating);
-                Players[player.Key]= (player.Value.position,newRating);
-                 if (player.Value.rating > 100)
-                    Players[player.Key] = (player.Value.position, 100);
-                if (player.Value.rating < 1)
-                    Players[player.Key] = (player.Value.position, 1);
-                Console.WriteLine($" {i,2} {player.Key,-20} {player.Value.position,-15} {oldRating,-15}  {player.Value.rating,-15}");
+                oldRating = Players[k].rating;
+                var a = ("", 0); 
+                double r= oldRating+oldRating*random.Next(-5,6)*0.01;
+                a = (Players[k].position, (int)r);
+                //Players[k] = ChangeRating(Players[k]);
+                Players[k] = a;
+                if (Players[k].rating > 100)
+                    Players[k] = (Players[k].position, 100);
+                if (Players[k].rating < 1)
+                    Players[k] = (Players[k].position, 1);
+                Console.WriteLine($" {i,2} {k,-20} {Players[k].position,-15} {oldRating,-15}  {Players[k].rating,-15} {Players[k].rating-oldRating,3}");
                 i++;
-            }*/
+            }
+            /*
             for (int j = 0; j < Players.Count; j++)
             {
                 oldRating = Players[Keys[j]].rating;
@@ -111,7 +91,7 @@ while (command != 0)
                     Players[Keys[j]] = (Players[Keys[j]].position, 1);
                 Console.WriteLine($" {i,2} {Keys[j],-20} {Players[Keys[j]].position,-15} {oldRating,-15}  {Players[Keys[j]].rating,-15}  {Players[Keys[j]].rating - oldRating,2}");
                 i++;
-            }
+            }}*/
             Console.WriteLine("\nUnesite bilo koji znak za vratiti se na izbornik.");
             Console.ReadKey();
             Console.Clear();
@@ -152,10 +132,12 @@ while (command != 0)
             {
                 case 1:
                     Console.Clear();
+                    i = 0;
                     Console.WriteLine($"  SPREMLJENI IGRAČI\n\n {" ",2} {"IME I PREZIME",-20} {"POZICIJA",-15} {"RATING",-15}\n");
-                    for (i = 0; i < Players.Count(); i++)
+                    foreach (var player in Players)
                     {
-                        Console.WriteLine($" {i + 1,2} {Keys[i],-20} {Players[Keys[i]].position,-15} {Players[Keys[i]].rating,-15}");
+                        Console.WriteLine($" {i + 1,2} {player.Key,-20} {player.Value.position,-15} {player.Value.rating,-15}");
+                        i++;
                     }
                     Console.WriteLine("\nUnesite bilo koji znak za vratiti se na izbornik.");
                     Console.ReadKey();
@@ -189,7 +171,7 @@ while (command != 0)
                 case 3:
                     Console.Clear();
                     i = 0;
-                    Console.WriteLine("  IGRAČI PO UZLAZNOM RATINGU\n");
+                    Console.WriteLine("  IGRAČI PO SILAZNOM RATINGU\n");
                     foreach (var player in Players.OrderBy(player => player.Value.rating).Reverse())
                     {
                         Console.WriteLine($" {i + 1,2} {player.Key,-20} {player.Value.position,-15} {player.Value.rating,-15}");
@@ -402,13 +384,6 @@ void PrintManual()
     "0 - Izlaz iz aplikacije";
     Console.WriteLine(manual);
 }
-int ChangeRating(int currentRating)
-{
-    Random random = new Random();
-    var diff = random.Next(-5, 6);
-    int newRating = (int)(currentRating + (int)diff);
-    return newRating;
-}
 void CreateFirst11()
 {
     First11.Clear();
@@ -462,20 +437,33 @@ void CreateGames()
     Console.WriteLine($"\n  ODIGRANE UTAKMICE:\n\n" +
         $"\t{Games[gamesCounter - 2].team1,8} {Games[gamesCounter - 2].goals1} : {Games[gamesCounter - 2].goals2} {Games[gamesCounter - 2].team2,-8} \n" +
         $"\t{Games[gamesCounter - 1].team1,8} {Games[gamesCounter - 1].goals1} : {Games[gamesCounter - 1].goals2} {Games[gamesCounter - 1].team2,-8}  ");
-    /*   if (Games[gamesCounter - 2].goals1 > Games[gamesCounter - 2].goals2)
-           foreach (var player in First11)
-               Players[player.Key].rating += (double)Players[player.Key].rating * 0.02;
+       if (Games[gamesCounter - 2].goals1 > Games[gamesCounter - 2].goals2)
+            foreach(var player in First11) { 
+            var a = ("", 0);
+            a = (Players[player.Key].position, Players[player.Key].rating + (int)(Players[player.Key].rating * 0.02));
+            Players[player.Key] = a;
+            }
+           
        if (Games[gamesCounter - 2].goals1 < Games[gamesCounter - 2].goals2)
-           foreach (var player in First11)
-               Players[player.Key].rating += (double)Players[player.Key].rating * 0.02;
-     */
+           foreach (var player in First11){
+           var a = ("", 0);
+           a = (Players[player.Key].position, Players[player.Key].rating - (int)(Players[player.Key].rating * 0.02));
+           Players[player.Key] = a;
+           }
+               
     if (Games[gamesCounter - 2].goals1 > 0)
     {
         Console.WriteLine("\n  STRIJELCI:");
         for (var i = 0; i < Games[gamesCounter - 2].goals1; i++)
         {
-            lineUp[i] = First11.ElementAt(random.Next(11)).Key;
-            //Players[lineUp[i]].rating += Players[lineUp[i]].rating * 0.05;
+            var s = "";
+            s= First11.ElementAt(random.Next(11)).Key;
+            if (!lineUp.Contains(s)) {
+            var a = ("", 0);
+            a = (Players[s].position, (int)(Players[s].rating*1.05));
+            Players[s]= a; 
+            }
+            lineUp[i] = s;
             if (Scorers.Keys.Contains(lineUp[i]))
                 Scorers[lineUp[i]]++;
             else
